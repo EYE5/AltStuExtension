@@ -1,8 +1,15 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
+import axios from 'axios';
+
 import './index.css';
+
 import App from './App';
-import { getStore } from './store/authStore';
+import { getStore } from './store/globalStore';
+
+import { HOST } from './constants';
+
+axios.defaults.baseURL = HOST;
 
 const store = getStore();
 

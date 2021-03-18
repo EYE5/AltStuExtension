@@ -1,9 +1,19 @@
-import { useEffect } from 'react';
+import { observer } from 'mobx-react-lite';
+import { List } from 'rsuite';
 
-import { observer } from 'mobx-react-lite'
+import { getStore } from '../../store/globalStore';
 
-const Messages = observer(() => {
-    return (
-        <div></div>
-    )
-})
+const store = getStore();
+
+const MessagesList = observer(() => {
+  const messages = store.messages;
+  return (
+    <List autoScroll>
+      {messages.map((message, index) => (
+        <List.Item key={index}>{message.details.sender}</List.Item>
+      ))}
+    </List>
+  );
+});
+
+export default MessagesList;
