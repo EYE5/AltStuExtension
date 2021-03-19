@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import { observer } from 'mobx-react-lite';
 import {
   Form,
   FormGroup,
@@ -11,7 +12,7 @@ import {
 
 import { getStore } from '../../store/globalStore';
 
-function Auth() {
+const Auth = observer(() => {
   const store = getStore();
 
   const [login, setLogin] = useState('');
@@ -19,7 +20,7 @@ function Auth() {
 
   const handleSubmit = () => store.auth(login, password);
   return (
-    <Panel header="Авторизация">
+    <Panel>
       <Form>
         <FormGroup>
           <ControlLabel>Email</ControlLabel>
@@ -38,13 +39,17 @@ function Auth() {
           />
         </FormGroup>
         <ButtonToolbar>
-          <Button appearance="primary" onClick={() => handleSubmit()}>
+          <Button
+            loading={store.loading}
+            appearance="primary"
+            onClick={() => handleSubmit()}
+          >
             Войти
           </Button>
         </ButtonToolbar>
       </Form>
     </Panel>
   );
-}
+});
 
 export default Auth;
