@@ -1,3 +1,4 @@
+import { useEffect } from 'react';
 import { List } from 'rsuite';
 import { useHistory } from 'react-router-dom';
 
@@ -7,6 +8,10 @@ const store = getStore();
 
 const Navigation = () => {
   const history = useHistory();
+
+  useEffect(() => {
+    store.header = 'Меню';
+  }, []);
 
   const loadMessages = () => {
     store.archiveMessages();

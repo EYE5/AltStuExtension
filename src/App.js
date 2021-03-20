@@ -15,20 +15,12 @@ import Files from './components/files';
 import 'rsuite/dist/styles/rsuite-dark.css';
 import './App.css';
 
-const HEADER = {
-  '/': 'Авторизация',
-  '/schedule': 'Расписание',
-  '/messages': 'Сообщения',
-  '/files': 'Файлы',
-  '/navigation': 'Навигация',
-};
-
 const App = observer(({ store }) => {
   return (
     <Container className="App">
       <Navbar>
         <Navbar.Header>
-          <h3>{HEADER[window.location.pathname]}</h3>
+          <h3>{store.header}</h3>
         </Navbar.Header>
       </Navbar>
       <Content>
@@ -51,13 +43,7 @@ const App = observer(({ store }) => {
         </Router>
       </Content>
       <Footer className="footer">
-        {store.session ? (
-          <Button className="footer-button" onClick={window.history.back()}>
-            Назад
-          </Button>
-        ) : (
-          ''
-        )}
+        {store.session ? <Button className="footer-button">Назад</Button> : ''}
       </Footer>
     </Container>
   );

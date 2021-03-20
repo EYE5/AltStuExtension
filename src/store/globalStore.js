@@ -13,6 +13,7 @@ export class globalStore {
   files = [];
   schedule = [];
   loading = false;
+  header = '';
   constructor() {
     makeAutoObservable(this);
 

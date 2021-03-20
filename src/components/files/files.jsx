@@ -1,3 +1,4 @@
+import { useEffect } from 'react';
 import { observer } from 'mobx-react-lite';
 import { List, Loader } from 'rsuite';
 
@@ -9,6 +10,10 @@ const store = getStore();
 
 const Files = observer(() => {
   const files = store.files;
+
+  useEffect(() => {
+    store.header = 'Файлы';
+  }, []);
 
   const filesUI = files.map((file, index) => {
     const fileName = file.link.slice(

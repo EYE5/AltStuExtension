@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { observer } from 'mobx-react-lite';
 import {
   Form,
@@ -14,6 +14,10 @@ import { getStore } from '../../store/globalStore';
 
 const Auth = observer(() => {
   const store = getStore();
+
+  useEffect(() => {
+    store.header = 'Авторизация';
+  }, []);
 
   const [login, setLogin] = useState('');
   const [password, setPassword] = useState('');

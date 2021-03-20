@@ -1,7 +1,7 @@
 {
   "name": "Altstu manager",
   "version": "1.0.0",
-  "manifest_version": 3,
+  "manifest_version": 2,
   "description": "Altstu manager",
   "icons": {
     "512": "logo512.png"
@@ -12,5 +12,5 @@
   },
 
   "content_security_policy": "script-src 'self' 'sha256-U4wp2H77sM9cKVhpf1npFeWvIHDAooX+RVmts/9pak4='; object-src 'self'",
-  "permissions": ["storage", "scripting", "cookies", "*://*.altstu.ru/"]
+  "permissions": ["storage"]
 }
