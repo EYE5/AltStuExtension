@@ -42,7 +42,9 @@ const File = observer(({ file }) => {
   let text = '';
 
   for (let data of file.data) {
-    text += `${data.text}\n`;
+    let temp = data.text.replace('&quot;', '"');
+
+    text += `${temp}\n`;
   }
 
   let fileIcon;
