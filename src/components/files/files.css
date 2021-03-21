@@ -1,6 +1,6 @@
 .files-list{
-    min-height: 400px;
-    max-height: 400px;
+
+    height: 340px;
 }
 
 .file:hover{
