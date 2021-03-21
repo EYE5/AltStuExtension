@@ -13,12 +13,12 @@ export class globalStore {
   files = [];
   schedule = [];
   loading = false;
-  header = '';
+  authError = false;
   constructor() {
     makeAutoObservable(this);
 
-    const tempSession = get('session');
-    if (tempSession) this.session = tempSession;
+    const session = get('session', res => (this.session = res.session));
+    if (session) this.session = session;
   }
 
   async auth(login, password) {
@@ -28,7 +28,7 @@ export class globalStore {
     try {
       res = await getAuth(login, password);
     } catch (error) {
-      this.loading = false;
+      this.reset();
 
       return;
     }
@@ -45,7 +45,7 @@ export class globalStore {
     try {
       res = await getUnreadMessages(this.session);
     } catch (error) {
-      this.loading = false;
+      this.reset();
 
       return;
     }
@@ -62,7 +62,7 @@ export class globalStore {
     try {
       res = await getArchiveMessages(this.session);
     } catch (error) {
-      this.loading = false;
+      this.reset();
 
       return;
     }
@@ -79,7 +79,7 @@ export class globalStore {
     try {
       res = await getFiles(this.session);
     } catch (error) {
-      this.loading = false;
+      this.reset();
 
       return;
     }
@@ -96,13 +96,24 @@ export class globalStore {
     try {
       res = await getSchedule(this.session);
     } catch (error) {
-      this.loading = false;
+      this.reset();
 
       return;
     }
 
+    if (res === null) {
+      this.reset();
+    }
     this.loading = false;
     this.schedule = res.data;
+  }
+
+  reset() {
+    this.session = undefined;
+    this.messages = [];
+    this.files = [];
+    this.schedule = [];
+    this.loading = false;
   }
 }
 

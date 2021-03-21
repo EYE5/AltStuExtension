@@ -3,9 +3,10 @@ import {
   Switch,
   Route,
   Redirect,
+  Link,
 } from 'react-router-dom';
 import { observer } from 'mobx-react-lite';
-import { Content, Container, Navbar, Footer, Button } from 'rsuite';
+import { Content, Container, Navbar, Nav, Icon } from 'rsuite';
 
 import Auth from './components/auth';
 import Navigation from './components/navigation';
@@ -18,13 +19,18 @@ import './App.css';
 const App = observer(({ store }) => {
   return (
     <Container className="App">
-      <Navbar>
-        <Navbar.Header>
-          <h3>{store.header}</h3>
-        </Navbar.Header>
-      </Navbar>
-      <Content>
-        <Router>
+      <Router>
+        <Navbar>
+          <Navbar.Header className="navbar-brand logo">АлтГТУ</Navbar.Header>
+          <Navbar.Body>
+            <Nav pullRight>
+              <Nav.Item componentClass="span" icon={<Icon icon="home" />}>
+                <Link to="/">Меню</Link>
+              </Nav.Item>
+            </Nav>
+          </Navbar.Body>
+        </Navbar>
+        <Content>
           <Switch>
             <Route path="/schedule">Расписание</Route>
             <Route path="/messages">
@@ -40,11 +46,8 @@ const App = observer(({ store }) => {
               {store.session ? <Redirect to="/navigation" /> : <Auth />}
             </Route>
           </Switch>
-        </Router>
-      </Content>
-      <Footer className="footer">
-        {store.session ? <Button className="footer-button">Назад</Button> : ''}
-      </Footer>
+        </Content>
+      </Router>
     </Container>
   );
 });

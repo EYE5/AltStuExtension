@@ -6,7 +6,6 @@
   max-height: 450px!important;
   padding: 2px;
   border-radius: 2px;
-
 }
 
 .footer{
@@ -15,4 +14,16 @@
 
 .footer-button{
   margin: 10px 10px 0 0;
+}
+
+.navbar-brand {
+    padding: 18px 20px;
+    display: inline-block;
+  }
+
+.navbar-nav span[role=button] {
+  padding: 15px;
+  display: inline-block;
+  line-height: 20px;
+
 }

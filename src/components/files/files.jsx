@@ -1,35 +1,43 @@
-import { useEffect } from 'react';
 import { observer } from 'mobx-react-lite';
 import { List, Loader } from 'rsuite';
 
+import File from './file';
 import { getStore } from '../../store/globalStore';
 
 import './files.css';
 
 const store = getStore();
 
+const styleCenter = {
+  display: 'flex',
+  justifyContent: 'center',
+  alignItems: 'center',
+  height: '60px',
+};
+
+const styleCenterLeft = {
+  display: 'flex',
+  justifyContent: 'left',
+  alignItems: 'center',
+  height: '60px',
+};
+
+const styleCenterRight = {
+  display: 'flex',
+  justifyContent: 'right',
+  alignItems: 'center',
+  height: '60px',
+};
+
 const Files = observer(() => {
   const files = store.files;
 
-  useEffect(() => {
-    store.header = 'Файлы';
-  }, []);
-
   const filesUI = files.map((file, index) => {
-    const fileName = file.link.slice(
-      file.link.lastIndexOf('/') + 1,
-      file.link.length,
-    );
-    return (
-      <List.Item key={index}>
-        <h4>{fileName}</h4>
-        <h4>{file.data.receiver}</h4>
-      </List.Item>
-    );
+    return <File file={file} key={index}></File>;
   });
 
   return (
-    <List className="files-list">
+    <List className="files-list" hover>
       {store.loading ? <Loader center size="lg" /> : filesUI}
     </List>
   );

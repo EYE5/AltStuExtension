@@ -6,7 +6,10 @@
  * @param {any} value
  */
 export function set(key, value) {
-  if (chrome.storage) chrome.storage.sync.set({ [key]: value });
+  if (chrome.storage)
+    chrome.storage.sync.set({ [key]: value }, () =>
+      console.error('saved', JSON.stringify(value)),
+    );
   else localStorage.setItem(key, value);
 }
 
@@ -15,17 +18,12 @@ export function set(key, value) {
  * @param {string} key
  * @returns Storage data
  */
-export function get(key) {
+export function get(key, func) {
   if (chrome.storage) {
-    let res;
-
     try {
-      res = chrome.storage.sync.get(key);
+      chrome.storage.sync.get([key], result => func(result));
     } catch (error) {
-      console.log('No item in storage for this key: ', key);
       return;
     }
-
-    return res;
-  } else localStorage.getItem(key);
+  } else return localStorage.getItem(key);
 }

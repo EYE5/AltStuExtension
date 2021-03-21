@@ -1,4 +1,8 @@
 .files-list{
     min-height: 400px;
-    max-height: 450px!important;
+    max-height: 400px;
+}
+
+.file:hover{
+    cursor: pointer;
 }
