@@ -22,7 +22,7 @@ export async function getArchiveMessages(session) {
   } catch (error) {
     throw error;
   }
-  console.error(res.status);
+
   if (res.status === 301) return null;
 
   return res;

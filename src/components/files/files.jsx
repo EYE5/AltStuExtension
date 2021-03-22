@@ -1,3 +1,4 @@
+import { useEffect } from 'react';
 import { observer } from 'mobx-react-lite';
 import { List, Loader } from 'rsuite';
 
@@ -8,33 +9,42 @@ import './files.css';
 
 const store = getStore();
 
-const styleCenter = {
-  display: 'flex',
-  justifyContent: 'center',
-  alignItems: 'center',
-  height: '60px',
-};
-
-const styleCenterLeft = {
-  display: 'flex',
-  justifyContent: 'left',
-  alignItems: 'center',
-  height: '60px',
-};
-
-const styleCenterRight = {
-  display: 'flex',
-  justifyContent: 'right',
-  alignItems: 'center',
-  height: '60px',
-};
-
 const Files = observer(() => {
-  const files = store.files;
+  useEffect(() => {
+    store.footerActions = [
+      {
+        func: () => (store.filesSorted = undefined),
+        text: 'Стандартный вид',
+      },
+      {
+        func: () => store.filesSort('date'),
+        text: 'По дате',
+      },
+      {
+        func: () => store.filesSort('sender'),
+        text: 'По преподавателю',
+      },
+    ];
+  }, []);
 
-  const filesUI = files.map((file, index) => {
-    return <File file={file} key={index}></File>;
-  });
+  let filesUI;
+
+  if (store.filesSorted) {
+    filesUI = [];
+    let idx = 1; //TODO Change this bullshit
+
+    for (const header in store.filesSorted) {
+      filesUI.push(<h3 key={`${header}${idx}`}>{header}</h3>);
+
+      for (const item of store.filesSorted[header]) {
+        filesUI.push(<File file={item} key={`${header}${++idx}`}></File>);
+      }
+    }
+  } else {
+    filesUI = store.files.map((file, index) => {
+      return <File file={file} key={index}></File>;
+    });
+  }
 
   return (
     <List className="files-list" hover>

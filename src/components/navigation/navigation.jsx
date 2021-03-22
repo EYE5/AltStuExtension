@@ -4,6 +4,8 @@ import { useHistory } from 'react-router-dom';
 
 import { getStore } from '../../store/globalStore';
 
+import './navigation.css';
+
 const store = getStore();
 
 const styleCenter = {
@@ -24,7 +26,7 @@ const Navigation = () => {
   const history = useHistory();
 
   const loadMessages = () => {
-    store.archiveMessages();
+    store.unreadMessages();
     history.push('/messages');
   };
 
@@ -37,8 +39,13 @@ const Navigation = () => {
     store.getFiles();
     history.push('/files');
   };
+
+  useEffect(() => {
+    store.reset(true);
+  }, []);
+
   return (
-    <List hover>
+    <List hover className="navigation">
       <List.Item onClick={() => loadSchedule()}>
         <FlexboxGrid>
           <FlexboxGrid.Item colspan={2} style={styleCenter}>
@@ -59,7 +66,6 @@ const Navigation = () => {
         </FlexboxGrid>
       </List.Item>
       <List.Item onClick={() => loadMessages()}>
-        {' '}
         <FlexboxGrid>
           <FlexboxGrid.Item colspan={2} style={styleCenter}>
             <Icon
@@ -79,7 +85,6 @@ const Navigation = () => {
         </FlexboxGrid>
       </List.Item>
       <List.Item onClick={() => loadFiles()}>
-        {' '}
         <FlexboxGrid>
           <FlexboxGrid.Item colspan={2} style={styleCenter}>
             <Icon

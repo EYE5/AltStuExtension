@@ -6,10 +6,7 @@
  * @param {any} value
  */
 export function set(key, value) {
-  if (chrome.storage)
-    chrome.storage.sync.set({ [key]: value }, () =>
-      console.error('saved', JSON.stringify(value)),
-    );
+  if (chrome.storage) chrome.storage.sync.set({ [key]: value });
   else localStorage.setItem(key, value);
 }
 

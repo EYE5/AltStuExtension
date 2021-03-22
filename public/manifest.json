@@ -10,6 +10,6 @@
     "default_icon": "logo512.png",
     "default_popup": "index.html"
   },
-
+  "content_security_policy": "script-src 'self' 'sha256-U4wp2H77sM9cKVhpf1npFeWvIHDAooX+RVmts/9pak4='; object-src 'self'",
   "permissions": ["storage", "activeTab", "http://*/*", "https://*/*"]
 }

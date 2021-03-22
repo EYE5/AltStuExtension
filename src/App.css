@@ -27,3 +27,27 @@
   line-height: 20px;
 
 }
+
+.footer-item{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 40px;
+  cursor: pointer;
+  padding: 0 10px;
+}
+.footer-item:hover{
+  background: #3C3F43;
+}
+
+.footer-item-text{
+  margin: 0 0 0 5px;
+  font-size: 1rem;
+  color: #34C3FF; 
+}
+
+.footer-item-text-disabled{
+  margin: 0 0 0 5px;
+  font-size: 1rem;
+  color: grey;
+}

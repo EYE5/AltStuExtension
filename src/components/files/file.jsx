@@ -44,7 +44,9 @@ const File = observer(({ file }) => {
   for (let data of file.data) {
     let temp = data.text.replace('&quot;', '"');
 
-    text += `${temp}\n`;
+    if (data.tag === 'a')
+      text += `<a href="${data.text}" target="_blank">${data.text}</a><br>`;
+    else text += `${temp}<br>`;
   }
 
   let fileIcon;
@@ -75,7 +77,7 @@ const File = observer(({ file }) => {
 
   return (
     <List.Item onClick={() => setToggle(!toggle)}>
-      <FlexboxGrid className="file">
+      <FlexboxGrid>
         <FlexboxGrid.Item colspan={2} style={styleCenter}>
           <Icon
             icon={fileIcon}
@@ -112,8 +114,11 @@ const File = observer(({ file }) => {
             <Row>
               <Col xs={12}>{file.details.sender}</Col>
             </Row>
+
             <Row>
-              <Col xs={20}>{text}</Col>
+              <Col xs={20}>
+                <span dangerouslySetInnerHTML={{ __html: text }}></span>
+              </Col>
             </Row>
           </Grid>
         </Panel>

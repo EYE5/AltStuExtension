@@ -2,3 +2,12 @@
     min-height: 400px;
     max-height: 400px;
 }
+
+.no-messages-block{
+    display: flex;
+    min-height: 400px;
+    max-height: 400px;
+
+    justify-content: center;
+    align-items: center;
+}
