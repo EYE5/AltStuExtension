@@ -29,7 +29,7 @@ const Messages = observer(() => {
     store.headerActions = [
       {
         func: () => store.unreadMessages(),
-        text: 'Не прочитанные',
+        text: 'Непрочитанные',
       },
       {
         func: () => store.archiveMessages(),
